@@ -15,7 +15,7 @@ const Navbar = () => {
   };
 
   return (
-    <nav className=" bg-transparent relative">
+    <nav className=" sticky top-0 bg-slate-900 z-50">
 
       <div className="w-full  px-4 sm:px-6 lg:px-8">
         
@@ -31,7 +31,7 @@ const Navbar = () => {
 
             <div className="hidden md:block ">
               <div className="ml-10 flex  items-baseline space-x-4">
-                <Link to="/" onClick={closeMenu} className="text-gray-300  hover:text-blue-600 px-3 py-2 rounded-md text-sm font-medium">Home</Link>
+                <Link to="/" onClick={closeMenu} className="text-gray-300  hover:text-blue-600 px-3 py-2 rounded-md text-sm font-medium">My Chats</Link>
                 <Link to="/about" onClick={closeMenu} className="text-gray-300  hover:text-blue-600 px-3 py-2 rounded-md text-sm font-medium">About</Link>
                 <Link to="/signin" onClick={closeMenu} className="text-gray-300  hover:text-blue-600 px-3 py-2 rounded-md text-sm font-medium ">Sign in</Link>
               </div>

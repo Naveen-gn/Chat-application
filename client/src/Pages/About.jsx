@@ -4,12 +4,12 @@ import { AiOutlineInfoCircle, AiOutlineUser, AiOutlineEye, AiOutlineLink,AiOutli
 
 export default function About() {
   return (
-<div className='w-full h-screen'>
+<div className='w-full h-screen mb-10'>
          <div className='mb-5'>
             <h1 className='text-white mt-10 text-center text-4xl'>Welcome to <span className='text-blue-600 font-semibold text-5xl'>N_chat</span></h1>
         </div>
 
-    <div className='flex mt-20 flex-row flex-wrap w-full justify-center'>
+    <div className='flex mt-20 flex-row flex-wrap w-full justify-center '>
 
         <div className="mt-10 w-full flex justify-center lg:w-2/5">
             <img src={Chaticon} className='w-80 h-72 z-0' />
