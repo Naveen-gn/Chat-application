@@ -16,7 +16,7 @@ export default function Signin() {
 <div className='w-full mb-10  md:w-full lg:w-1/2 xl:w-1/2 2xl:w-1/2  flex justify-center items-center flex-col '>
 
 <div className="">
-  <img src={Chaticon} className='w-80 h-72' />
+  <img src={Chaticon} className='w-80 h-72 z-0' />
   {/* <Link to='/' className='text-decoration-none text-white bg-gradient-to-r from-blue-700 via-grey-300 to-grey-500  rounded-full text-3xl p-4'>N-chat</Link> */}
   </div>
   
