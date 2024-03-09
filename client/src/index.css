@@ -1,6 +1,9 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+body {
+  background-color: rgb(15, 23, 42); /* Replace with your desired color */
+}
 html::-webkit-scrollbar {
     width: 5px;
   }
