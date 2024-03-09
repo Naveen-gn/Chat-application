@@ -9,10 +9,10 @@ export default function Signin() {
     setPasswordShown(passwordShown ? false : true);
   };
   return (
-<div className='w-full h-screen bg-slate-900 flex flex-wrap justify-center '>
+<div className='w-full h-screen  bg-slate-900 flex flex-wrap justify-center '>
 
 
-<div className='w-full sm:w-1/2 md:w-full lg:w-1/2  flex justify-center items-center '>
+<div className='w-full mb-10  md:w-full lg:w-1/2 xl:w-1/2 2xl:w-1/2  flex justify-center items-center '>
 <div className="flex flex-col justify-center items-center gap-4">
   <Link to='/' className='text-decoration-none text-white bg-gradient-to-r from-blue-700 via-grey-300 to-grey-500  rounded-full text-3xl p-4'>N-chat</Link>
   <div className='w-3/4 sm:3/4'>
@@ -22,8 +22,8 @@ export default function Signin() {
   </div>
   </div>
 
-<div className="  w-full sm:w-1/2 md:w-full lg:w-1/2  flex justify-center items-center " >
-  <div  className='p-12 rounded-3xl border border-blue-600 w-full   md:w-3/5 shadow shadow-slate-700'>
+<div className="w-full  md:w-full lg:w-1/2 xl:w-1/2 2xl:w-1/2 flex justify-center items-center  " >
+  <div  className='w-96 p-12 rounded-3xl border border-blue-600    shadow shadow-slate-70'>
   <h4 className='text-white mb-6 text-center '>Sign in</h4>
         <div className='flex flex-col gap-6 justify-center  '>
         <input
