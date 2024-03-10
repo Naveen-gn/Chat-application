@@ -8,6 +8,41 @@ export default function Signin() {
   const [passwordShown, setPasswordShown] = useState(false);
   const togglePasswordVisiblity = () => {
     setPasswordShown(passwordShown ? false : true);
+
+    const [formData, setFormData] = useState({});
+    const {loading,error:errorMessage}=useSelector(state=>state.user)
+    const user=useSelector(state=>state.user)
+    const dispatch = useDispatch();
+    const navigate=useNavigate();
+    const handleChange = (e) => {
+      setFormData({ ...formData, [e.target.id]: e.target.value.trim() });     
+    };
+    const handleSubmit=async(e)=>{
+      e.preventDefault()
+      if (!formData.email || !formData.password) {
+        return dispatch(signInFailure('Please fill all the fields'));
+      }
+      try {
+       dispatch(signInStart());
+        const res=await fetch('https://naveen-mern-blog-app-server.vercel.app/api/auth/signin',{
+          method:'POST',
+          headers:{
+            'Content-Type':'application/json'
+          },
+          body:JSON.stringify(formData)
+        });
+        const data=await res.json()
+        if (data.success===false) {
+         return dispatch(signInFailure(data.message))
+        }
+        if (res.ok) {
+          dispatch(signInSuccess(data));
+          navigate('/')
+        }
+      } catch (error) {
+        dispatch(signInFailure(error.message))
+      }
+    };
   };
   return (
 <div className='w-full h-screen flex flex-wrap justify-center  '>
@@ -31,10 +66,13 @@ export default function Signin() {
   <div  className='w-96 p-12 rounded-3xl border border-blue-600    shadow shadow-slate-70'>
   <h4 className='text-white mb-6 text-center '>Sign in</h4>
         <div className='flex flex-col gap-6 justify-center  '>
+          <form onSubmit={handleSubmit}>
         <input
           type="email"
           className=" w-full px-4 py-2 rounded-2xl border border-blue-600 focus:outline-none"
           placeholder="example@gmail.com"
+          id='email'
+          onChange={handleChange}
         />
         <div className="relative">
       <input
@@ -43,6 +81,8 @@ export default function Signin() {
         placeholder="password"
         autoComplete='off'
         onCopy={(e) => e.preventDefault()}
+        id='password'
+        onChange={handleChange}
       />
       <i 
         onClick={togglePasswordVisiblity} 
@@ -51,14 +91,8 @@ export default function Signin() {
         {passwordShown ? <FontAwesomeIcon icon={faEye} /> : <FontAwesomeIcon icon={faEyeSlash} />}
       </i>
     </div>
-      
-        {/* <input
-          type="password"
-          className=" w-full px-4 py-2 border border-blue-600 rounded-2xl focus:outline-none"
-          placeholder="password"
-          
-        /> */}
-        <button  className="px-4 py-2 bg-blue-600 text-white rounded-full hover:bg-blue-500 text-center ">Signin</button>
+        <button  className="px-4 py-2 bg-blue-600 text-white rounded-full hover:bg-blue-500 text-center " type='submit' disabled={loading} >Signin</button>
+        </form>
         </div>
         <div className='flex flex-col gap-4 mt-5'>
         <h4 className='text-white text-center'>Or continue with google</h4>

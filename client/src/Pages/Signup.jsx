@@ -107,8 +107,16 @@ export default function Signin() {
         {passwordShown ? <FontAwesomeIcon icon={faEye} /> : <FontAwesomeIcon icon={faEyeSlash} />}
       </i>
     </div>
-        <button  className="px-4 py-2 bg-blue-600 text-white rounded-full hover:bg-blue-500 text-center " type='submit' disabled={loading}>Signup</button>
+    <button className="px-4 py-2 bg-blue-600 text-white rounded-full hover:bg-blue-500 text-center " type='submit' disabled={loading}>
+            {
+              loading ? (<>
+                <span className='ml-2'>Signing up...</span>
+              </>
+              ) : 'Sign Up'
+            }
+            </button>
         </form>
+        
         </div>
         
         <div className='flex flex-col gap-4 mt-5'>
@@ -118,6 +126,11 @@ export default function Signin() {
         </div>
         <h4 className='text-white'>Already haven an account! <Link to='/signin' className='text-decoration-none text-blue-600 hover:text-blue-500'>Sign in</Link></h4>
         </div>
+        {
+            errorMessage && <h3 className='mt-5 text-red-600'>
+              {errorMessage}
+            </h3>
+          }
       </div>
 
   </div>
