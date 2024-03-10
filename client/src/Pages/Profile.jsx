@@ -38,14 +38,14 @@ e.preventDefault();
 
           <div className='mt-2'><img alt='user' src={currentUser.profilePicture} className="rounded-full h-40 w-40" /></div>
 
-          <div className='flex flex-col gap-5 justify-between  w-80'>
+          <div className='flex flex-col gap-5 justify-between min-w-80'>
 
           <div className='flex items-center gap-6 border p-5 px-10 rounded-2xl '>
             <FaUser color='white' size='2em' />
             <h1 className='text-white text-2xl'>{currentUser.username}</h1>
           </div>
 
-          <div className='flex items-center gap-6 border p-5 px-10 rounded-2xl'>
+          <div className='flex items-center gap-6 border p-5  rounded-2xl'>
             <FaEnvelope color='white' size='2em' />
             <h1 className='text-white text-2xl'>{currentUser.email}</h1>
           </div>

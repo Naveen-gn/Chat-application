@@ -3,7 +3,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faEye, faEyeSlash } from '@fortawesome/free-solid-svg-icons';
 import Chaticon from '../assets/chat.png'
 import { Link,useNavigate } from 'react-router-dom'
-
+import OAuth from '../Components/OAuth';
 const baseUrl = 'http://localhost:5000/';
 
 export default function Signin() {
@@ -18,7 +18,6 @@ export default function Signin() {
   const handleChange = (e) => {
     setFormData({ ...formData, [e.target.id]: e.target.value.trim() });     
   };
-  console.log(formData);
 
   const handleSubmit=async(e)=>{
     e.preventDefault()
@@ -122,7 +121,7 @@ export default function Signin() {
         <div className='flex flex-col gap-4 mt-5'>
         <h4 className='text-white text-center'>Or continue with google</h4>
         <div className='w-full flex justify-center '>
-        <button  className="px-4 py-2 bg-blue-600 text-white rounded-full hover:bg-blue-500">Signup with google</button>
+        <OAuth/>
         </div>
         <h4 className='text-white'>Already haven an account! <Link to='/signin' className='text-decoration-none text-blue-600 hover:text-blue-500'>Sign in</Link></h4>
         </div>
