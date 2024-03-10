@@ -1,11 +1,38 @@
-import React, { useState, useRef } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { Link } from 'react-router-dom';
 import Chaticon from '../assets/chat.png';
+import { useSelector } from 'react-redux';
 
 const Navbar = () => {
+  const [isOpen, setIsOpen] = useState(false);
+
+  const profileToggleMenu = () => {
+    setIsOpen(!isOpen);
+  };
+  useEffect(() => {
+    const closeMenu = (e) => {
+      if (menuRef.current && !menuRef.current.contains(e.target)) {
+        setIsOpen(false);
+      }
+    };
+
+    if (isOpen) {
+      document.addEventListener('mousedown', closeMenu);
+    }
+
+    return () => {
+      document.removeEventListener('mousedown', closeMenu);
+    };
+  }, [isOpen]);
+
+
+
+
+
+  const { currentUser } = useSelector((state) => state.user);
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const buttonRef = useRef(null);
-
+console.log(currentUser);
   const toggleMenu = () => {
     setIsMenuOpen(!isMenuOpen);
   };
@@ -24,25 +51,21 @@ const Navbar = () => {
           <div className="flex items-center w-full  justify-between">
 
             <div className="flex flex-row items-center ">
+
             <img src={Chaticon} className='w-8 h-7' /> <span className=' text-blue-600 text-3xl font-bold ml-2 '>N_chat</span> 
             </div>
 <div className='flex gap-4'>
-
-
             <div className="hidden md:block ">
               <div className="ml-10 flex  items-baseline space-x-4">
                 <Link to="/" onClick={closeMenu} className="text-gray-300  hover:text-blue-600 px-3 py-2 rounded-md text-sm font-medium">My Chats</Link>
                 <Link to="/about" onClick={closeMenu} className="text-gray-300  hover:text-blue-600 px-3 py-2 rounded-md text-sm font-medium">About</Link>
-                <Link to="/signin" onClick={closeMenu} className="text-gray-300  hover:text-blue-600 px-3 py-2 rounded-md text-sm font-medium ">Sign in</Link>
+                {!currentUser && <Link to="/signin" onClick={closeMenu} className="text-gray-300  hover:text-blue-600 px-3 py-2 rounded-md text-sm font-medium ">Sign in</Link>}
               </div>
             </div>
-
             <div>
-            <img
-          className="inline-block h-8 w-8 rounded-full ring-2 ring-white mr-3"
-          src="https://isobarscience-1bfd8.kxcdn.com/wp-content/uploads/2020/09/default-profile-picture1.jpg"
-          alt=""
-        />
+              <Link to='/profile' >
+                    <img alt='user' src={currentUser.profilePicture} className="rounded-full h-8 w-8" />
+              </Link>
             </div>
             </div>
           </div>
@@ -63,7 +86,7 @@ const Navbar = () => {
         <div className="absolute right-0 mt-2 bg-white border border-gray-300 rounded-md shadow-lg py-2 px-3 z-50" style={{ top: buttonRef.current.offsetTop + buttonRef.current.offsetHeight }}>
           <Link to="/" onClick={closeMenu} className="text-gray-800 block px-4 py-2 text-sm hover:bg-gray-200">Home</Link>
           <Link to="/about" onClick={closeMenu} className="text-gray-800 block px-4 py-2 text-sm hover:bg-gray-200">About</Link>
-          <Link to="/signin" onClick={closeMenu} className="text-gray-800 block px-4 py-2 text-sm hover:bg-gray-200">Sign in</Link>
+          {!currentUser && <Link to="/signin" onClick={closeMenu} className="text-gray-800 block px-4 py-2 text-sm hover:bg-gray-200">Sign in</Link>}
         </div>
       )}
     </nav>

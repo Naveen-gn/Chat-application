@@ -5,6 +5,7 @@ import Signin from './Pages/Signin'
 import Signup from './Pages/Signup'
 import About from './Pages/About'
 import Chats from './Pages/Chats'
+import Profile from './Pages/Profile'
 
 // import Footer from './Components/Footer'
 
@@ -18,6 +19,7 @@ export default function App() {
       <Route path='/signup' element={<Signup/>}/>
       <Route path='/signin' element={<Signin/>}/>
       <Route path='/about' element={<About/>}/>
+      <Route path='/profile' element={<Profile/>}/>
     </Routes>
     {/* <Footer/> */}
    </Router>
