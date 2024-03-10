@@ -4,39 +4,13 @@ import Chaticon from '../assets/chat.png';
 import { useSelector } from 'react-redux';
 
 const Navbar = () => {
-  const [isOpen, setIsOpen] = useState(false);
-
-  const profileToggleMenu = () => {
-    setIsOpen(!isOpen);
-  };
-  useEffect(() => {
-    const closeMenu = (e) => {
-      if (menuRef.current && !menuRef.current.contains(e.target)) {
-        setIsOpen(false);
-      }
-    };
-
-    if (isOpen) {
-      document.addEventListener('mousedown', closeMenu);
-    }
-
-    return () => {
-      document.removeEventListener('mousedown', closeMenu);
-    };
-  }, [isOpen]);
-
-
-
-
-
   const { currentUser } = useSelector((state) => state.user);
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+  console.log(currentUser);
   const buttonRef = useRef(null);
-console.log(currentUser);
   const toggleMenu = () => {
     setIsMenuOpen(!isMenuOpen);
   };
-
   const closeMenu = () => {
     setIsMenuOpen(false);
   };
@@ -63,9 +37,11 @@ console.log(currentUser);
               </div>
             </div>
             <div>
-              <Link to='/profile' >
-                    <img alt='user' src={currentUser.profilePicture} className="rounded-full h-8 w-8" />
-              </Link>
+            {currentUser && (
+  <Link to='/profile'>
+    <img alt='user' src={currentUser.profilePicture} className="rounded-full h-8 w-8" />
+  </Link>
+)}
             </div>
             </div>
           </div>
