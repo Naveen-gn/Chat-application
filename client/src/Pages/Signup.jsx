@@ -1,14 +1,57 @@
 import React, { useState } from 'react'
-import { Link } from 'react-router-dom'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faEye, faEyeSlash } from '@fortawesome/free-solid-svg-icons';
 import Chaticon from '../assets/chat.png'
+import { Link,useNavigate } from 'react-router-dom'
+
+const baseUrl = 'http://localhost:5000/';
 
 export default function Signin() {
   const [passwordShown, setPasswordShown] = useState(false);
   const togglePasswordVisiblity = () => {
     setPasswordShown(passwordShown ? false : true);
   };
+  const [formData, setFormData] = useState({});
+  const [errorMessage, setErrorMessage] = useState(null);
+  const [loading, setLoading] = useState(false);
+  const navigate=useNavigate();
+  const handleChange = (e) => {
+    setFormData({ ...formData, [e.target.id]: e.target.value.trim() });     
+  };
+  console.log(formData);
+
+  const handleSubmit=async(e)=>{
+    e.preventDefault()
+    if (!formData.username || !formData.email || !formData.password) {
+      return setErrorMessage('Please fill all the fields');
+    }
+    try {
+      setLoading(true);
+      setErrorMessage(null);
+      const res=await fetch('http://localhost:5000/api/auth/signup',{
+        method:'POST',
+        headers:{
+          'Content-Type':'application/json'
+        },
+        body:JSON.stringify(formData)
+      });
+      const data=await res.json()
+      console.log(data);
+      if (data.success===false) {
+        setLoading(false);
+       return setErrorMessage("Username or Email already exists! Please try again.");
+       
+      }
+      if (res.ok) {
+        navigate('/signin')
+      }
+    } 
+    catch (error) {
+      setErrorMessage(error.message || "Something went wrong! Please try again.");
+      setLoading(false);
+    }
+  };
+
   return (
 <div className='w-full h-screen flex flex-wrap justify-center '>
 
@@ -31,10 +74,21 @@ export default function Signin() {
   <div  className='w-96 p-12 rounded-3xl border border-blue-600    shadow shadow-slate-70'>
   <h4 className='text-white mb-6 text-center '>Sign up</h4>
         <div className='flex flex-col gap-6 justify-center  '>
+          
+          <form className='flex flex-col gap-6 justify-center' onSubmit={handleSubmit} >
+        <input
+          type="text"
+          className=" w-full px-4 py-2 rounded-2xl border border-blue-600 focus:outline-none"
+          placeholder="username"
+          id='username'
+          onChange={handleChange}
+        />
         <input
           type="email"
           className=" w-full px-4 py-2 rounded-2xl border border-blue-600 focus:outline-none"
           placeholder="example@gmail.com"
+          id='email'
+          onChange={handleChange}
         />
         <div className="relative">
       <input
@@ -42,6 +96,8 @@ export default function Signin() {
         className="w-full px-4 py-2 border border-blue-600 rounded-2xl focus:outline-none"
         placeholder="password"
         autoComplete='off'
+        id='password'
+        onChange={handleChange}
         onCopy={(e) => e.preventDefault()}
       />
       <i 
@@ -51,15 +107,10 @@ export default function Signin() {
         {passwordShown ? <FontAwesomeIcon icon={faEye} /> : <FontAwesomeIcon icon={faEyeSlash} />}
       </i>
     </div>
-      
-        {/* <input
-          type="password"
-          className=" w-full px-4 py-2 border border-blue-600 rounded-2xl focus:outline-none"
-          placeholder="password"
-          
-        /> */}
-        <button  className="px-4 py-2 bg-blue-600 text-white rounded-full hover:bg-blue-500 text-center ">Signup</button>
+        <button  className="px-4 py-2 bg-blue-600 text-white rounded-full hover:bg-blue-500 text-center " type='submit' disabled={loading}>Signup</button>
+        </form>
         </div>
+        
         <div className='flex flex-col gap-4 mt-5'>
         <h4 className='text-white text-center'>Or continue with google</h4>
         <div className='w-full flex justify-center '>
