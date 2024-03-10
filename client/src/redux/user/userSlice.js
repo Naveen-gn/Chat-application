@@ -60,6 +60,7 @@ const userSlice = createSlice({
 export const {
   signInStart,
   signInSuccess,
+  signoutSuccess,
   signInFailure,
 } = userSlice.actions;
 
