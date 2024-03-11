@@ -40,14 +40,14 @@ e.preventDefault();
 
           <div className='flex flex-col gap-5 justify-between min-w-80'>
 
-          <div className='flex items-center gap-6 border p-5 px-10 rounded-2xl '>
+          <div className='flex items-center gap-6 border p-4 px-4 rounded-2xl sm:p-5 sm:px-10'>
             <FaUser color='white' size='2em' />
-            <h1 className='text-white text-2xl'>{currentUser.username}</h1>
+            <h1 className='text-white text-lg sm:text-xl'>{currentUser.username}</h1>
           </div>
 
           <div className='flex items-center gap-6 border p-5  rounded-2xl'>
             <FaEnvelope color='white' size='2em' />
-            <h1 className='text-white text-2xl'>{currentUser.email}</h1>
+            <h1 className='text-white text-lg sm:text-xl'>{currentUser.email}</h1>
           </div>
 
           <form className='flex  gap-6 mx-auto' >
