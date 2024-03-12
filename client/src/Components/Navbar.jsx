@@ -59,7 +59,7 @@ const Navbar = () => {
       {/* Popover-like menu */}
       {isMenuOpen && (
         <div className="absolute right-0 mt-2 bg-white border border-gray-300 rounded-md shadow-lg py-2 px-3 z-50" style={{ top: buttonRef.current.offsetTop + buttonRef.current.offsetHeight }}>
-          <Link to="/" onClick={closeMenu} className="text-gray-800 block px-4 py-2 text-sm hover:bg-gray-200">Home</Link>
+          <Link to="/" onClick={closeMenu} className="text-gray-800 block px-4 py-2 text-sm hover:bg-gray-200">My Chats</Link>
           <Link to="/about" onClick={closeMenu} className="text-gray-800 block px-4 py-2 text-sm hover:bg-gray-200">About</Link>
           {!currentUser && <Link to="/signin" onClick={closeMenu} className="text-gray-800 block px-4 py-2 text-sm hover:bg-gray-200">Sign in</Link>}
         </div>
