@@ -140,7 +140,7 @@ export default function Chats() {
       
       <div className='Rightside  sm:w-2/3 lg:w-3/4 hidden sm:block h-screen overflow-y-auto min-h-screen'>
 
-        <div className='flex items-center justify-between p-4 w-full bg-slate-800 z-30 sticky top-0 mb-6' >
+        <div className='flex items-center justify-between p-4 w-full bg-slate-800 z-30 sticky top-0 mb-3 border-b border-b-slate-600' >
           <div className='flex items-center'>
             <img src='https://isobarscience-1bfd8.kxcdn.com/wp-content/uploads/2020/09/default-profile-picture1.jpg' alt='user' className='w-10 h-10 rounded-full' />
               <div className='ml-5'>
