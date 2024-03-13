@@ -3,6 +3,7 @@
 @tailwind utilities;
 body {
   background-color: rgb(15, 23, 42); /* Replace with your desired color */
+  overflow-y: hidden;
 }
 html::-webkit-scrollbar {
     width: 5px;
@@ -18,5 +19,39 @@ html::-webkit-scrollbar {
   }
   
   html::-webkit-scrollbar-thumb:hover {
+    background: rgb(59, 130, 246);
+  }
+
+.Leftside::-webkit-scrollbar {
+    width: 5px;
+  }
+  
+  .Leftside::-webkit-scrollbar-track {
+    background: rgb(34, 42, 53);
+  }
+  
+  .Leftside::-webkit-scrollbar-thumb {
+    background: rgb(98, 105, 112);
+    border-radius: 10px;
+  }
+  
+  .Leftside::-webkit-scrollbar-thumb:hover {
+    background: rgb(59, 130, 246);
+  }
+
+.Rightside::-webkit-scrollbar {
+    width: 5px;
+  }
+  
+  .Rightside::-webkit-scrollbar-track {
+    background: rgb(34, 42, 53);
+  }
+  
+  .Rightside::-webkit-scrollbar-thumb {
+    background: rgb(98, 105, 112);
+    border-radius: 10px;
+  }
+  
+  .Rightside::-webkit-scrollbar-thumb:hover {
     background: rgb(59, 130, 246);
   }

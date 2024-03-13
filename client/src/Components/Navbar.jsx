@@ -15,7 +15,7 @@ const Navbar = () => {
   };
 
   return (
-    <nav className=" sticky top-0 bg-slate-900 z-50 ">
+    <nav className=" sticky top-0 bg-slate-900 z-50 border-b border-b-blue-600">
 
       <div className="w-full  px-4 sm:px-6 lg:px-8">
         
