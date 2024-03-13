@@ -4,7 +4,7 @@ import { AiOutlineInfoCircle, AiOutlineUser, AiOutlineEye, AiOutlineLink,AiOutli
 
 export default function About() {
   return (
-<div className='w-full h-screen mb-10'>
+<div className='About w-full h-screen mb-10 overflow-y-scroll'>
          <div className='mb-5'>
             <h1 className='text-white mt-10 text-center text-4xl'>Welcome to <span className='text-blue-600 font-semibold text-5xl'>N_chat</span></h1>
         </div>

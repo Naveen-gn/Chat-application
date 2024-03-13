@@ -55,3 +55,71 @@ html::-webkit-scrollbar {
   .Rightside::-webkit-scrollbar-thumb:hover {
     background: rgb(59, 130, 246);
   }
+
+.About::-webkit-scrollbar {
+    width: 5px;
+  }
+  
+  .About::-webkit-scrollbar-track {
+    background: rgb(34, 42, 53);
+  }
+  
+  .About::-webkit-scrollbar-thumb {
+    background: rgb(98, 105, 112);
+    border-radius: 10px;
+  }
+  
+  .About::-webkit-scrollbar-thumb:hover {
+    background: rgb(59, 130, 246);
+  }
+
+.Profile::-webkit-scrollbar {
+    width: 5px;
+  }
+  
+  .Profile::-webkit-scrollbar-track {
+    background: rgb(34, 42, 53);
+  }
+  
+  .Profile::-webkit-scrollbar-thumb {
+    background: rgb(98, 105, 112);
+    border-radius: 10px;
+  }
+  
+  .Profile::-webkit-scrollbar-thumb:hover {
+    background: rgb(59, 130, 246);
+  }
+
+.Signin::-webkit-scrollbar {
+    width: 5px;
+  }
+  
+  .Signin::-webkit-scrollbar-track {
+    background: rgb(34, 42, 53);
+  }
+  
+  .Signin::-webkit-scrollbar-thumb {
+    background: rgb(98, 105, 112);
+    border-radius: 10px;
+  }
+  
+  .Signin::-webkit-scrollbar-thumb:hover {
+    background: rgb(59, 130, 246);
+  }
+
+.Signup::-webkit-scrollbar {
+    width: 5px;
+  }
+  
+  .Signup::-webkit-scrollbar-track {
+    background: rgb(34, 42, 53);
+  }
+  
+  .Signup::-webkit-scrollbar-thumb {
+    background: rgb(98, 105, 112);
+    border-radius: 10px;
+  }
+  
+  .Signup::-webkit-scrollbar-thumb:hover {
+    background: rgb(59, 130, 246);
+  }

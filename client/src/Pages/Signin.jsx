@@ -49,7 +49,7 @@ export default function Signin() {
     }
   };
   return (
-<div className='w-full h-screen flex flex-wrap justify-center  '>
+<div className='Signin w-full h-screen flex flex-wrap justify-center overflow-y-scroll '>
 
 
 <div className='w-full mb-10  md:w-full lg:w-1/2 xl:w-1/2 2xl:w-1/2  flex justify-center items-center flex-col '>

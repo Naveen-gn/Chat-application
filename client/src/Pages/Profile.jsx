@@ -33,7 +33,7 @@ e.preventDefault();
   };
   return (
     <>
-      <div className='flex flex-col justify-center items-center gap-10'>
+      <div className='Profile flex flex-col justify-center items-center gap-10 overflow-y-scroll'>
           <div><h1 className='text-white text-3xl text-center mt-10'>My Profile</h1></div>
 
           <div className='mt-2'><img alt='user' src={currentUser.profilePicture} className="rounded-full h-40 w-40" /></div>
