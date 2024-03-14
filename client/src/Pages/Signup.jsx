@@ -52,7 +52,7 @@ export default function Signin() {
   };
 
   return (
-<div className='Signup w-full h-screen flex flex-wrap justify-center overflow-y-scroll'>
+<div className='Signup w-full h-screen flex flex-wrap justify-center overflow-y-auto'>
 
 
 <div className='w-full mb-10  md:w-full lg:w-1/2 xl:w-1/2 2xl:w-1/2  flex justify-center items-center flex-col '>
@@ -70,7 +70,7 @@ export default function Signin() {
   </div>
 
 <div className="w-full  md:w-full lg:w-1/2 xl:w-1/2 2xl:w-1/2 flex justify-center items-center  " >
-  <div  className='w-96 p-12 rounded-3xl border border-blue-600    shadow shadow-slate-70'>
+  <div  className='w-96 p-12 rounded-3xl border border-blue-600  mb-20  shadow shadow-slate-70'>
   <h4 className='text-white mb-6 text-center '>Sign up</h4>
         <div className='flex flex-col gap-6 justify-center  '>
           
