@@ -3,10 +3,17 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faEye, faEyeSlash } from '@fortawesome/free-solid-svg-icons';
 import Chaticon from '../assets/chat.png'
 import { Link,useNavigate } from 'react-router-dom'
-import OAuth from '../Components/OAuth';
+import { AiOutlineDown } from 'react-icons/ai';
 const baseUrl = 'http://localhost:5000/';
 
 export default function Signin() {
+  const [isOpen, setIsOpen] = useState(false);
+    const [selectedOption, setSelectedOption] = useState('Select Gender');
+    const options=["male","female"]
+    const handleOptionClick = (option) => {
+      setSelectedOption(option);
+      setIsOpen(false);
+    };
   const [passwordShown, setPasswordShown] = useState(false);
   const togglePasswordVisiblity = () => {
     setPasswordShown(passwordShown ? false : true);
@@ -69,7 +76,7 @@ export default function Signin() {
 
   </div>
 
-<div className="w-full  md:w-full lg:w-1/2 xl:w-1/2 2xl:w-1/2 flex justify-center items-center  " >
+<div className="w-full  md:w-full lg:mt-10 lg:w-1/2 xl:w-1/2 2xl:w-1/2 flex justify-center items-center  " >
   <div  className='w-96 p-12 rounded-3xl border border-blue-600  mb-20  shadow shadow-slate-70'>
   <h4 className='text-white mb-6 text-center '>Sign up</h4>
         <div className='flex flex-col gap-6 justify-center  '>
@@ -78,17 +85,20 @@ export default function Signin() {
         <input
           type="text"
           className=" w-full px-4 py-2 rounded-2xl border border-blue-600 focus:outline-none"
+          placeholder="fullname"
+          id='fullname'
+          onChange={handleChange}
+        />
+        <input
+          type="text"
+          className=" w-full px-4 py-2 rounded-2xl border border-blue-600 focus:outline-none"
           placeholder="username"
           id='username'
           onChange={handleChange}
         />
-        <input
-          type="email"
-          className=" w-full px-4 py-2 rounded-2xl border border-blue-600 focus:outline-none"
-          placeholder="example@gmail.com"
-          id='email'
-          onChange={handleChange}
-        />
+        
+
+
         <div className="relative">
       <input
         type={passwordShown ? "text" : "password"}
@@ -106,6 +116,25 @@ export default function Signin() {
         {passwordShown ? <FontAwesomeIcon icon={faEye} /> : <FontAwesomeIcon icon={faEyeSlash} />}
       </i>
     </div>
+
+
+       
+    
+    <div className='relative'>
+    <button onClick={() => setIsOpen(!isOpen)} className='bg-white px-4 py-2 border border-blue-600  focus:outline-none flex justify-between items-center p-3 gap-3 rounded-xl w-full text-gray-400'>
+          {selectedOption}
+          <AiOutlineDown className='ml-2 text-blue-600 font-bold' />
+        </button>
+        {isOpen && (
+          <ul className="options absolute  top-8 bg-white border-2 border-slate-200 w-full mt-2 py-1 rounded-xl shadow-lg overflow-y-auto">
+            {options.map((options) => (
+              <li key={options} className="py-1 px-4 hover:bg-gray-100 cursor-pointer" onClick={() => handleOptionClick(options)}>
+                {options}
+              </li>
+            ))}
+          </ul>
+        )}
+        </div>
     <button className="px-4 py-2 bg-blue-600 text-white rounded-full hover:bg-blue-500 text-center " type='submit' disabled={loading}>
             {
               loading ? (<>
@@ -118,13 +147,8 @@ export default function Signin() {
         
         </div>
         
-        <div className='flex flex-col gap-4 mt-5'>
-        <h4 className='text-white text-center'>Or continue with google</h4>
-        <div className='w-full flex justify-center '>
-        <OAuth/>
-        </div>
-        <h4 className='text-white'>Already haven an account! <Link to='/signin' className='text-decoration-none text-blue-600 hover:text-blue-500'>Sign in</Link></h4>
-        </div>
+       
+        <h4 className='text-white mt-5'>Already haven an account! <Link to='/signin' className='text-decoration-none text-blue-600 hover:text-blue-500 '>Sign in</Link></h4>
         {
             errorMessage && <h3 className='mt-5 text-red-600'>
               {errorMessage}
