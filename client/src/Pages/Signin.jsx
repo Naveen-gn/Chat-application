@@ -79,7 +79,7 @@ export default function Signin() {
               </label>
 
               <button
-                className="px-4 py-2 bg-blue-600 text-white rounded-full hover:bg-blue-500 text-center "
+                className="btn bg-blue-700 hover:bg-blue-600 rounded-2xl text-black"
                 type="submit"
                 disabled={loading}
               >
