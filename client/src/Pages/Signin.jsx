@@ -3,9 +3,7 @@ import { Link,useNavigate } from 'react-router-dom'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faEye, faEyeSlash } from '@fortawesome/free-solid-svg-icons';
 import Chaticon from '../assets/chat.png'
-import { useDispatch,useSelector } from 'react-redux';
-import { signInStart,signInSuccess,signInFailure } from '../redux/user/userSlice';
-import OAuth from '../Components/OAuth';
+
 const baseUrl = 'http://localhost:5000/';
 
 export default function Signin() {
@@ -13,41 +11,14 @@ export default function Signin() {
   const togglePasswordVisiblity = () => {
     setPasswordShown(passwordShown ? false : true);
   };
-
+  const [loading, setLoading] = useState(false);
+  const [errorMessage, setErrorMessage] = useState('');
   const [formData, setFormData] = useState({});
-  const {loading,error:errorMessage}=useSelector(state=>state.user)
-  const user=useSelector(state=>state.user)
-  const dispatch = useDispatch();
   const navigate=useNavigate();
   const handleChange = (e) => {
     setFormData({ ...formData, [e.target.id]: e.target.value.trim() });     
   };
-  const handleSubmit=async(e)=>{
-    e.preventDefault()
-    if (!formData.email || !formData.password) {
-      return dispatch(signInFailure('Please fill all the fields'));
-    }
-    try {
-     dispatch(signInStart());
-      const res=await fetch(`${baseUrl}api/auth/signin`,{
-        method:'POST',
-        headers:{
-          'Content-Type':'application/json'
-        },
-        body:JSON.stringify(formData)
-      });
-      const data=await res.json()
-      if (data.success===false) {
-       return dispatch(signInFailure(data.message))
-      }
-      if (res.ok) {
-        dispatch(signInSuccess(data));
-        navigate('/')
-      }
-    } catch (error) {
-      dispatch(signInFailure(error.message))
-    }
-  };
+ 
   return (
 <div className='Signin w-full h-screen flex flex-wrap justify-center overflow-y-auto '>
 
@@ -68,14 +39,14 @@ export default function Signin() {
 
 <div className="w-full  md:w-full lg:w-1/2 xl:w-1/2 2xl:w-1/2 flex justify-center items-center  " >
   <div  className='w-96 p-12 rounded-3xl border border-blue-600    shadow shadow-slate-70 mb-20'>
-  <h4 className='text-white mb-6 text-center '>Sign in</h4>
+  <h4 className='text-white mb-6 text-center '>Login</h4>
         <div className='flex flex-col gap-6 justify-center '>
-          <form className='flex flex-col gap-6 justify-center  ' onSubmit={handleSubmit}>
+          <form className='flex flex-col gap-6 justify-center  ' >
         <input
-          type="email"
+          type="text"
           className=" w-full px-4 py-2 rounded-2xl border border-blue-600 focus:outline-none"
-          placeholder="example@gmail.com"
-          id='email'
+          placeholder="Username"
+          id='username'
           onChange={handleChange}
         />
         <div className="relative">
@@ -105,15 +76,7 @@ export default function Signin() {
             </button>
         </form>
         </div>
-        <div className='flex flex-col gap-4 mt-5'>
-        <h4 className='text-white text-center'>Or continue with google</h4>
-        <div className='w-full flex justify-center '>
-
-        <OAuth/>
-
-        </div>
-        <h4 className='text-white'>Don't haven an account! <Link to='/signup' className='text-decoration-none text-blue-600 hover:text-blue-500'>Sign up</Link></h4>
-        </div>
+        
         {
             errorMessage && <h3 className='mt-5 text-red-600'>
               {errorMessage}
