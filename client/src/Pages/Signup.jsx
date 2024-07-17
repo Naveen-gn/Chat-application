@@ -1,57 +1,61 @@
 import React, { useState } from "react";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faEye, faEyeSlash } from "@fortawesome/free-solid-svg-icons";
 import Chaticon from "../assets/chat.png";
 import { Link, useNavigate } from "react-router-dom";
-import { AiOutlineDown } from "react-icons/ai";
-const baseUrl = "http://localhost:5000/";
+import { toast } from "react-hot-toast";
+import { useAuthContext } from "../context/AuthContext";
+
 
 export default function Signin() {
-  const [passwordShown, setPasswordShown] = useState(false);
-  const togglePasswordVisiblity = () => {
-    setPasswordShown(passwordShown ? false : true);
-  };
-  const [formData, setFormData] = useState({});
-  const [errorMessage, setErrorMessage] = useState(null);
+  const baseUrl = "http://localhost:5000/";
   const [loading, setLoading] = useState(false);
-  const navigate = useNavigate();
-  const handleChange = (e) => {
-    setFormData({ ...formData, [e.target.id]: e.target.value.trim() });
+  const {authUser,setAuthUser}=useAuthContext();
+  const [inputs, setInputs] = useState({
+    name: "",
+    username: "",
+    password: "",
+    gender: "",
+  });
+  const handleCheckboxChange = (gender) => {
+    setInputs({ ...inputs,gender });
   };
-
+ 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    if (!formData.username || !formData.email || !formData.password) {
-      return setErrorMessage("Please fill all the fields");
+    if (!inputs.name || !inputs.username || !inputs.password || !inputs.gender) {
+      toast.error("Please fill all the fields.")
     }
+    if (inputs.password.length < 6) {
+      toast.error("Password must be atleast 6 characters long.")
+    }
+    setLoading(true);
     try {
-      setLoading(true);
-      setErrorMessage(null);
       const res = await fetch(`${baseUrl}api/auth/signup`, {
         method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(formData),
+        headers: {"Content-Type": "application/json"},
+        body: JSON.stringify(inputs),
       });
       const data = await res.json();
-      console.log(data);
-      if (data.success === false) {
+      if(data.error){
+        throw new Error(data.error);
+      }
+      if (res.status === 200) {
+        toast.success(data.message);
         setLoading(false);
-        return setErrorMessage(
-          "Username or Email already exists! Please try again."
-        );
       }
-      if (res.ok) {
-        navigate("/signin");
+      if (res.status === 400) {
+        toast.error(data.message);
+        setLoading(false);
       }
+      localStorage.setItem("chat-user", JSON.stringify(data));
+      setAuthUser(data);
     } catch (error) {
-      setErrorMessage(
-        error.message || "Something went wrong! Please try again."
-      );
+      setLoading(false);
+      toast.error("Something went wrong! Please try again.")
+    }finally{
       setLoading(false);
     }
-  };
+  }
+
 
   return (
     <div className="Signup w-full h-screen flex flex-wrap justify-center overflow-y-auto">
@@ -81,7 +85,9 @@ export default function Signin() {
                 placeholder="Fullname"
                 className="input input-bordered w-full max-w-xs rounded-2xl text-white"
                 id="fullname"
-                onChange={handleChange}
+                required
+                value={inputs.name}
+                onChange={(e) =>{setInputs({...inputs, name: e.target.value})}}
               />
               <label className="input input-bordered flex items-center gap-2 rounded-2xl">
                 <svg
@@ -97,7 +103,9 @@ export default function Signin() {
                   className="grow rounded-2xl"
                   placeholder="Username"
                   id="username"
-                  onChange={handleChange}
+                  required
+                  value={inputs.username}
+                  onChange={(e) =>{setInputs({...inputs, username: e.target.value})}}
                 />
               </label>
               <label className="input input-bordered flex items-center gap-2 rounded-2xl">
@@ -118,7 +126,9 @@ export default function Signin() {
                   className="grow rounded-2xl"
                   placeholder="password"
                   id="password"
-                  onChange={handleChange}
+                  required
+                  value={inputs.password}
+                  onChange={(e) =>{setInputs({...inputs, password: e.target.value})}}
                 />
               </label>
 
@@ -130,7 +140,10 @@ export default function Signin() {
                     name="gender"
                     id="male"
                     value="male"
+                    required
                     className="radio"
+                    checked={inputs.gender==="male"}
+                    onChange={() => handleCheckboxChange("male")}
                   />
                   <label
                     htmlFor="male"
@@ -145,7 +158,10 @@ export default function Signin() {
                     name="gender"
                     value="female"
                     id="female"
+                    required
                     className="radio"
+                    checked={inputs.gender==="female"}
+                    onChange={() => handleCheckboxChange("female")}
                   />
                   <label
                     htmlFor="female"
@@ -163,7 +179,7 @@ export default function Signin() {
               >
                 {loading ? (
                   <>
-                    <span className="ml-2">Signing up...</span>
+                    <span className="loading loading-spinner text-white"></span>
                   </>
                 ) : (
                   "Sign Up"
@@ -181,9 +197,6 @@ export default function Signin() {
               Login
             </Link>
           </h4>
-          {errorMessage && (
-            <h3 className="mt-5 text-red-600">{errorMessage}</h3>
-          )}
         </div>
       </div>
     </div>

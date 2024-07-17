@@ -1,21 +1,48 @@
 import React, { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import Chaticon from "../assets/chat.png";
+import { useAuthContext } from "../context/AuthContext";
+import toast from "react-hot-toast";
 
-const baseUrl = "http://localhost:5000/";
 
 export default function Signin() {
-  const [passwordShown, setPasswordShown] = useState(false);
-  const togglePasswordVisiblity = () => {
-    setPasswordShown(passwordShown ? false : true);
-  };
   const [loading, setLoading] = useState(false);
-  const [errorMessage, setErrorMessage] = useState("");
-  const [formData, setFormData] = useState({});
-  const navigate = useNavigate();
-  const handleChange = (e) => {
-    setFormData({ ...formData, [e.target.id]: e.target.value.trim() });
-  };
+  const [username, setUsername] = useState("");
+  const [password,setPassword] = useState("");
+  const {setAuthUser}= useAuthContext();
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    setLoading(true);
+    try {
+      const res = await fetch("api/auth/login", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ username, password }),
+      });
+      const data = await res.json();
+      if(res.status !== 200){
+        throw new Error(data.message);
+      }
+      if (data.error) {
+        throw new Error(data.error);
+      }
+      if (res.status === 400) {
+        throw new Error(data.message);
+      }
+      if(res.status === 200){
+      localStorage.setItem("chat-user", JSON.stringify(data));
+      setAuthUser(data);
+      }
+      
+    } catch (error) {
+      toast.error(error.message);
+    } finally {
+      setLoading(false);
+    }
+  }
 
   return (
     <div className="Signin w-full h-screen flex flex-wrap justify-center overflow-y-auto ">
@@ -38,7 +65,7 @@ export default function Signin() {
             Login
           </h4>
           <div className="flex flex-col gap-6 justify-center ">
-            <form className="flex flex-col gap-6 justify-center  ">
+            <form className="flex flex-col gap-6 justify-center " onSubmit={handleSubmit}>
               <label className="input input-bordered flex items-center gap-2 rounded-2xl">
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
@@ -53,7 +80,9 @@ export default function Signin() {
                   className="grow rounded-2xl"
                   placeholder="Username"
                   id="username"
-                  onChange={handleChange}
+                  value={username}
+                  required
+                  onChange={(e) => setUsername(e.target.value)}
                 />
               </label>
               <label className="input input-bordered flex items-center gap-2 rounded-2xl">
@@ -74,7 +103,9 @@ export default function Signin() {
                   className="grow rounded-2xl"
                   placeholder="password"
                   id="password"
-                  onChange={handleChange}
+                  value={password}
+                  required
+                  onChange={(e) => setPassword(e.target.value)}
                 />
               </label>
 
@@ -102,10 +133,6 @@ export default function Signin() {
               Signup
             </Link>
           </h4>
-
-          {errorMessage && (
-            <h3 className="mt-5 text-red-600">{errorMessage}</h3>
-          )}
         </div>
       </div>
     </div>

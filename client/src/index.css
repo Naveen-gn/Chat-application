@@ -2,126 +2,64 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
-body {
-  background-color: rgb(15, 23, 42); /* Replace with your desired color */
-  overflow-y: hidden;
-  font-family: "Poppins", sans-serif;
+*{
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  font-family: 'Poppins', sans-serif;
+  scroll-behavior: smooth;  
 }
-html::-webkit-scrollbar {
-    width: 5px;
-  }
-  
-  html::-webkit-scrollbar-track {
-    background: rgb(34, 42, 53);
-  }
-  
-  html::-webkit-scrollbar-thumb {
-    background: rgb(98, 105, 112);
-    border-radius: 10px;
-  }
-  
-  html::-webkit-scrollbar-thumb:hover {
-    background: rgb(59, 130, 246);
-  }
 
-.Leftside::-webkit-scrollbar {
-    width: 5px;
-  }
-  
-  .Leftside::-webkit-scrollbar-track {
-    background: rgb(34, 42, 53);
-  }
-  
-  .Leftside::-webkit-scrollbar-thumb {
-    background: rgb(98, 105, 112);
-    border-radius: 10px;
-  }
-  
-  .Leftside::-webkit-scrollbar-thumb:hover {
-    background: rgb(59, 130, 246);
-  }
+html{
+scroll-behavior: smooth;
+}
 
-.Rightside::-webkit-scrollbar {
-    width: 5px;
-  }
-  
-  .Rightside::-webkit-scrollbar-track {
-    background: rgb(34, 42, 53);
-  }
-  
-  .Rightside::-webkit-scrollbar-thumb {
-    background: rgb(98, 105, 112);
-    border-radius: 10px;
-  }
-  
-  .Rightside::-webkit-scrollbar-thumb:hover {
-    background: rgb(59, 130, 246);
-  }
+body{
+margin: 0px !important;
+padding: 0;
+background-color: rgb(15, 23, 42); /* Replace with your desired color */
+font-family: "Poppins", sans-serif;
+}
 
-.About::-webkit-scrollbar {
-    width: 5px;
-  }
-  
-  .About::-webkit-scrollbar-track {
-    background: rgb(34, 42, 53);
-  }
-  
-  .About::-webkit-scrollbar-thumb {
-    background: rgb(98, 105, 112);
-    border-radius: 10px;
-  }
-  
-  .About::-webkit-scrollbar-thumb:hover {
-    background: rgb(59, 130, 246);
-  }
+::-webkit-scrollbar {
+  width: 4px;
+ 
+}
 
-.Profile::-webkit-scrollbar {
-    width: 5px;
-  }
-  
-  .Profile::-webkit-scrollbar-track {
-    background: rgb(34, 42, 53);
-  }
-  
-  .Profile::-webkit-scrollbar-thumb {
-    background: rgb(98, 105, 112);
-    border-radius: 10px;
-  }
-  
-  .Profile::-webkit-scrollbar-thumb:hover {
-    background: rgb(59, 130, 246);
-  }
+/* Track */
+::-webkit-scrollbar-track {
+  background:#222A35;
+}
 
-.Signin::-webkit-scrollbar {
-    width: 5px;
-  }
-  
-  .Signin::-webkit-scrollbar-track {
-    background: rgb(34, 42, 53);
-  }
-  
-  .Signin::-webkit-scrollbar-thumb {
-    background: rgb(98, 105, 112);
-    border-radius: 10px;
-  }
-  
-  .Signin::-webkit-scrollbar-thumb:hover {
-    background: rgb(59, 130, 246);
-  }
+/* Handle */
+::-webkit-scrollbar-thumb {
+  background: #575C66;
+  border-radius: 6px;
+}
 
-.Signup::-webkit-scrollbar {
-    width: 5px;
-  }
-  
-  .Signup::-webkit-scrollbar-track {
-    background: rgb(34, 42, 53);
-  }
-  
-  .Signup::-webkit-scrollbar-thumb {
-    background: rgb(98, 105, 112);
-    border-radius: 10px;
-  }
-  
-  .Signup::-webkit-scrollbar-thumb:hover {
-    background: rgb(59, 130, 246);
-  }
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+  background: #626970;
+}
+
+
+.Messagecontainer::-webkit-scrollbar {
+  width: 4px;
+ 
+}
+
+/* Track */
+.Messagecontainer::-webkit-scrollbar-track {
+  background:#222A35;
+}
+
+/* Handle */
+.Messagecontainer::-webkit-scrollbar-thumb {
+  background: #575C66;
+  border-radius: 6px;
+}
+
+/* Handle on hover */
+.Messagecontainer::-webkit-scrollbar-thumb:hover {
+  background: #626970;
+}
