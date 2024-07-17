@@ -3,7 +3,6 @@ import { BrowserRouter as Router, Routes,Route, Navigate  } from 'react-router-d
 import Signin from './Pages/Signin'
 import Signup from './Pages/Signup'
 import Home from './Pages/Home'
-import './index.css'
 import { Toaster } from 'react-hot-toast'
 import { useAuthContext } from './context/AuthContext'
 

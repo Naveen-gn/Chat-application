@@ -6,7 +6,9 @@ export const sendMessage= async(req,res)=>{
         const {id:reciverId}= req.params;
         const senderId = req.user._id;
         const {message} = req.body;
-        console.log("message",message);
+        // console.log("message",message);
+        // console.log("reciverId",reciverId);
+        // console.log("senderId",senderId);
         let conversation = await Conversation.findOne({
             participants:{$all:[senderId,reciverId]},
         }) 

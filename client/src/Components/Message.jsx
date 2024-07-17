@@ -3,7 +3,7 @@ import React from 'react'
 export default function Message() {
   return (
     <div>
-<div className="chat chat-start">
+<div className="chat chat-start my-2">
   <div className="chat-image avatar">
     <div className="w-10 rounded-full">
       <img
@@ -14,7 +14,7 @@ export default function Message() {
   <div className="chat-bubble">It was said that you would, destroy the Sith, not join them.</div>
 </div>
 
-<div className="chat chat-end">
+<div className="chat chat-end my-2">
   <div className="chat-image avatar">
     <div className="w-10 rounded-full">
       <img

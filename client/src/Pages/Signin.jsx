@@ -116,7 +116,7 @@ export default function Signin() {
               >
                 {loading ? (
                   <>
-                    <span className="ml-2">Signing in...</span>
+                     <span className="loading loading-spinner text-white"></span>
                   </>
                 ) : (
                   "Login"

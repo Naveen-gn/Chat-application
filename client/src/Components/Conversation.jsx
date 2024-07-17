@@ -1,19 +1,25 @@
 import React from 'react'
+import useConversation from '../store/useConversation';
 
-export default function Conversation() {
+export default function Conversation({conversation,emoji}) {
+  const {selectedConversation, setSelectedConversation}=useConversation();
+  const isSelected = selectedConversation?._id === conversation._id;
   return (
     <>
-    <div className="flex items-center gap-2 hover:bg-blue-800 rounded cursor-pointer p-2 py-1">
+    <div className={`flex items-center gap-2 hover:bg-blue-800 rounded cursor-pointer p-2 py-1
+      ${isSelected ? 'bg-blue-800' :''}`}
+      onClick={() => setSelectedConversation(conversation)}
+      >
       <div className="avatar online">
         <div className="w-12 rounded-full">
-          <img src="https://isobarscience-1bfd8.kxcdn.com/wp-content/uploads/2020/09/default-profile-picture1.jpg" alt='User Profile' />
+          <img src={conversation.profilePic} alt='User Profile' />
         </div>
       </div>
 
       <div className='flex flex-col flex-1'>
             <div className='flex gap-3 justify-between'>
-                <p className='font-bold text-white'>User</p>
-                <span className='text-xl'>✨</span>
+                <p className='font-bold text-white'>{conversation.name}</p>
+                <span className='text-xl'>{emoji}</span>
             </div>
       </div>
     </div>

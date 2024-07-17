@@ -2,24 +2,29 @@ import React from "react";
 import Messages from "./Messages";
 import Messageinput from "./Messageinput";
 import { TiMessages } from "react-icons/ti";
+import  useConversation  from "../store/useConversation";
+import { useEffect } from "react";
 
 export default function Messagecontainer() {
-  const  nochatselected = false;
+  const {selectedConversation, setSelectedConversation}=useConversation();
+  useEffect(()=>{
+    return ()=> setSelectedConversation(null);
+  },[])
   return (
-    <div className="Messagecontainer  sm:w-2/3 lg:w-3/4 hidden sm:block h-screen overflow-y-auto min-h-screen">
-      {nochatselected ? <Nochatselected /> : (
+    <div className="Messagecontainer  sm:w-2/3 lg:w-3/4 hidden sm:block h-screen overflow-y-auto min-h-screen scrollbar-thin ">
+      {!selectedConversation ? <Nochatselected /> : (
         <>
         <div className="w-full bg-slate-800 px-4 py-2 mb-2 sticky top-0 z-50">
           <div className="flex items-center gap-3">
             <div className="avatar online">
               <div className="w-9 rounded-full">
                 <img
-                  src="https://isobarscience-1bfd8.kxcdn.com/wp-content/uploads/2020/09/default-profile-picture1.jpg"
+                  src={selectedConversation.profilePic}
                   alt="User Profile"
                 />
               </div>
             </div>
-            <span className="text-white font-medium">Reciver</span>
+            <span className="text-white font-medium">{selectedConversation.name}</span>
           </div>
         </div>
         <Messages />
