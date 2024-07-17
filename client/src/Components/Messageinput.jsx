@@ -13,7 +13,7 @@ export default function Messageinput() {
     setmessage("");
   };
   return (
-    <div className="bg-slate-800 pt-3 p-2 sticky bottom-0 ">
+    <div className="bg-slate-800 pt-3 p-2 sticky bottom-0 w-full">
           <form className=" px-3" onSubmit={handleSubmit}>
             <div className="w-full relative">
               <input

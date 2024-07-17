@@ -27,8 +27,14 @@ export default function Messagecontainer() {
             <span className="text-white font-medium">{selectedConversation.name}</span>
           </div>
         </div>
+<div className="pb-20 lg:px-8">
+
         <Messages />
+</div>
+        <div className="mt-auto absolute bottom-0 sm:w-2/3 lg:w-3/4">
         <Messageinput />
+
+        </div>
       </>
       )}
     </div>
