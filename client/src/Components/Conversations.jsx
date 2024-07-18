@@ -8,6 +8,7 @@ export default function Conversations() {
  console.log("Conversations are",conversations);
   return (
     <div className='flex flex-col py-2 gap-3 overflow-auto'>
+      {conversations.length === 0 && !loading && <p className="text-white text-center">No users found to chat</p>}
       {conversations.map((conversation,idx) => (
         <Conversation 
         key={conversation._id}

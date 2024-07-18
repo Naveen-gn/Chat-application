@@ -6,7 +6,6 @@ import { useAuthContext } from "../context/AuthContext";
 
 
 export default function Signin() {
-  const baseUrl = "http://localhost:5000/";
   const [loading, setLoading] = useState(false);
   const {authUser,setAuthUser}=useAuthContext();
   const [inputs, setInputs] = useState({
@@ -29,7 +28,7 @@ export default function Signin() {
     }
     setLoading(true);
     try {
-      const res = await fetch(`${baseUrl}api/auth/signup`, {
+      const res = await fetch("api/auth/signup", {
         method: "POST",
         headers: {"Content-Type": "application/json"},
         body: JSON.stringify(inputs),
