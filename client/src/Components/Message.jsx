@@ -11,6 +11,8 @@ export default function Message({message}) {
  const chatClassName = fromMe ? 'chat-end' : 'chat-start';
  const profilePic = fromMe ? authUser.profilePic : selectedConversation?.profilePic;
  const bubbleBgColor = fromMe ? 'bg-blue-900' : 'bg-slate-600';
+ const shakeClass = message.shouldShake?'shake':'';
+
   return (
     <div>
       <div className={`chat ${chatClassName} py-2`}>
@@ -22,7 +24,7 @@ export default function Message({message}) {
             />
           </div>
         </div>
-        <div className={`chat-bubble text-white ${bubbleBgColor}`}>{message.message}</div>
+        <div className={`chat-bubble text-white ${bubbleBgColor} ${shakeClass}`}>{message.message}</div>
         <div className="chat-footer opacity-50 text-xs flex gap-1 items-center mt-1">{formatedTime}</div>
       </div>
 
