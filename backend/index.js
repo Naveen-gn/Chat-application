@@ -16,16 +16,34 @@ mongoose
   .connect(process.env.MONGO)
   .then(() => console.log('MongoDB is connected'))
   .catch(err => console.error(err));
+
+  const allowedOrigins = [
+    'https://naveen-chat-app.vercel.app/',
+    'http://localhost:3000'
+  ];
   
-  app.use(cors());
+  const corsOptions = {
+    origin: function (origin, callback) {
+      if (!origin) return callback(null, true);
+  
+      if (allowedOrigins.indexOf(origin) !== -1) {
+        callback(null, true);
+      } else {
+        callback(new Error('Not allowed by CORS'));
+      }
+    },
+    methods: ['GET', 'POST'],
+    allowedHeaders: ['Content-Type', 'Authorization'],
+  };
+  
+  
+  app.use(cors(corsOptions));
   app.use(express.json());
   app.use(cookieParser());
   
   const PORT = process.env.PORT || 5000;
   
-  // app.get("/", (req, res) => {
-  //   res.json({ message: "🦄🌈✨👋🌎🌍🌏✨🌈🦄" });
-  // });
+
 
   app.get('/', (req, res) => {
     res.json({ message: 'API is working'});
