@@ -26,8 +26,6 @@ app.use("/api/auth",authRoutes)
 app.use("/api/message",messageRoutes)
 app.use("/api/users",userRoutes)
 
-const __dirname = path.resolve();
-app.use(express.static(path.join(__dirname, '/client/dist')));
 
 app.get("/", (req, res) => {
   res.json({ message: "🦄🌈✨👋🌎🌍🌏✨🌈🦄" });
