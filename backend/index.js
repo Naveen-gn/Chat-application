@@ -23,8 +23,12 @@ mongoose
   
   const PORT = process.env.PORT || 5000;
   
-  app.get("/", (req, res) => {
-    res.json({ message: "🦄🌈✨👋🌎🌍🌏✨🌈🦄" });
+  // app.get("/", (req, res) => {
+  //   res.json({ message: "🦄🌈✨👋🌎🌍🌏✨🌈🦄" });
+  // });
+
+  app.get('/', (req, res) => {
+    res.json({ message: 'API is working'});
   });
   
   app.use("/api/auth",authRoutes)
