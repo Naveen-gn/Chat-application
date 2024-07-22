@@ -1,14 +1,16 @@
-import express from 'express';
+import express, { json, static } from 'express';
 import cors from 'cors';
-import mongoose from 'mongoose';
-import dotenv from 'dotenv';
+import mongoose, { connect, get } from 'mongoose';
+import dotenv, { config } from 'dotenv';
 import cookieParser from 'cookie-parser';
-import path from 'path';
+import path, { join, resolve } from 'path';
 
 import authRoutes from './routes/auth.route.js';
 import messageRoutes from './routes/message.route.js';
 import userRoutes from './routes/user.route.js';
 import { app, server } from './socket/socket.js';
+import { log, error } from 'console';
+import { env } from 'process';
 
 dotenv.config();
 
@@ -17,25 +19,29 @@ mongoose
   .then(() => console.log('MongoDB is connected'))
   .catch(err => console.error(err));
 
-  const allowedOrigins = [
-    'https://naveen-chat-app.vercel.app',
-    'http://localhost:3000'
-  ];
+  // const allowedOrigins = [
+  //   'https://naveen-chat-app.vercel.app',
+  //   'http://localhost:3000'
+  // ];
+  
+  // const corsOptions = {
+  //   origin: function (origin, callback) {
+  //     if (!origin) return callback(null, true);
+  
+  //     if (allowedOrigins.indexOf(origin) !== -1) {
+  //       callback(null, true);
+  //     } else {
+  //       callback(new Error('Not allowed by CORS'));
+  //     }
+  //   },
+  //   methods: ['GET', 'POST'],
+  //   allowedHeaders: ['Content-Type', 'Authorization'],
+  // };
   
   const corsOptions = {
-    origin: function (origin, callback) {
-      if (!origin) return callback(null, true);
-  
-      if (allowedOrigins.indexOf(origin) !== -1) {
-        callback(null, true);
-      } else {
-        callback(new Error('Not allowed by CORS'));
-      }
-    },
-    methods: ['GET', 'POST'],
-    allowedHeaders: ['Content-Type', 'Authorization'],
-  };
-  
+  origin: 'https://naveen-chat-app.vercel.app',
+  optionsSuccessStatus: 200 // some legacy browsers (IE11, various SmartTVs) choke on 204
+}
   
   app.use(cors(corsOptions));
   app.use(express.json());
