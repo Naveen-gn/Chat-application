@@ -19,30 +19,18 @@ mongoose
   .then(() => console.log('MongoDB is connected'))
   .catch(err => console.error(err));
 
-  // const allowedOrigins = [
-  //   'https://naveen-chat-app.vercel.app',
-  //   'http://localhost:3000'
-  // ];
-  
-  // const corsOptions = {
-  //   origin: function (origin, callback) {
-  //     if (!origin) return callback(null, true);
-  
-  //     if (allowedOrigins.indexOf(origin) !== -1) {
-  //       callback(null, true);
-  //     } else {
-  //       callback(new Error('Not allowed by CORS'));
-  //     }
-  //   },
-  //   methods: ['GET', 'POST'],
-  //   allowedHeaders: ['Content-Type', 'Authorization'],
-  // };
-  
-  const corsOptions = {
-  origin: 'https://naveen-chat-app.vercel.app',
-  optionsSuccessStatus: 200 // some legacy browsers (IE11, various SmartTVs) choke on 204
+var whitelist = ['https://naveen-chat-app.vercel.app', 'https://vercel.com' ,'http://localhost:3000']
+var corsOptions = {
+  origin: function (origin, callback) {
+    if (whitelist.indexOf(origin) !== -1) {
+      callback(null, true)
+    } else {
+      callback(new Error('Not allowed by CORS'))
+    }
+  }
 }
   
+
   app.use(cors(corsOptions));
   app.use(express.json());
   app.use(cookieParser());
