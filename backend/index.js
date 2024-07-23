@@ -1,4 +1,4 @@
-import express, { json, static } from 'express';
+import express, { json } from 'express';
 import cors from 'cors';
 import mongoose, { connect, get } from 'mongoose';
 import dotenv, { config } from 'dotenv';
@@ -36,8 +36,8 @@ mongoose
   app.use("/api/message",messageRoutes)
   app.use("/api/users",userRoutes)
 
-const __dirname = path.resolve();
-app.use(express.static(path.join(__dirname, '/client/dist')));
+// const __dirname = path.resolve();
+// app.use(express.static(path.join(__dirname, '/client/dist')));
 
 
 
