@@ -8,7 +8,7 @@ const generateTokenAndCookie =(userId,res)=>{
     //     // sameSite:"strict",//cookie will only be sent in a first-party context
     //     // secure:process.env.NODE_ENV === "production" ? true : false,//cookie will only be sent in https
     // };
-    res.cookie("jwt",token,{ httpOnly: true });
+    res.cookie("jwt", token, { httpOnly: true, secure: process.env.NODE_ENV === 'production' });
     return token;
 }
 export default generateTokenAndCookie;
