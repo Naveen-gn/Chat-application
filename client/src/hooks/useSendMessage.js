@@ -9,7 +9,7 @@ const{messages,setMessages,selectedConversation}=useConversation();
 const sendMessage = async (message) => {
     try {
         setLoading(true);
-        const res =await fetch (`/api/message/send/${selectedConversation._id}`,{
+        const res =await fetch (`https://chat-app-server-chi-three.vercel.app/api/message/send/${selectedConversation._id}`,{
             method:"POST",
             headers:{"Content-Type":"application/json",},
             body:JSON.stringify({message}),
