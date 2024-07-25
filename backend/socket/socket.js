@@ -7,7 +7,13 @@ import cors from 'cors';
 const app = express();
 app.use(cors());
 const server = http.createServer(app);
-const io = new Server(server);
+const io = new Server(server, {
+    cors: {
+      origin: "https://naveen-chat-app.vercel.app",
+      methods: ["GET", "POST"],
+      credentials: true
+    }
+  });
 
 export const getReceiverSocketId = (receiverId) => {
     return userSocketMap[receiverId];
