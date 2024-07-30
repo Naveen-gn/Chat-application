@@ -5,7 +5,7 @@ const protectRoute = async (req, res, next) => {
         const token = req.cookies.jwt;
         // console.log("token",token);
         if (!token) {
-            return res.status(401).json({ error: "You are not authorized." });
+            return res.status(401).json({ error: "You are not authorized. cookie not found." });
         }
         const decoded = jwt.verify(token, process.env.JWT_SECRET);
         if (!decoded) {
