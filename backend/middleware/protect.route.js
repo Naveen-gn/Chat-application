@@ -2,7 +2,7 @@ import jwt from 'jsonwebtoken';
 import User from '../model/user.model.js';
 const protectRoute = async (req, res, next) => {
     try {
-        const token = req.body;
+        const token = req.cookies.jwt;
         // console.log("token",token);
         if (!token) {
             return res.status(401).json({ error:  "You are not authorized. cookie not found." });
