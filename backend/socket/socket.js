@@ -19,7 +19,7 @@ export const getReceiverSocketId = (receiverId) => {
 
 const userSocketMap ={};
 
-io.on('https://nchatapp-server.vercel.app', (socket) => {
+io.on('connection', (socket) => {
     console.log('A user connected',socket.id);
     const userId = socket.handshake.query.userId;
     if (userId !=undefined){

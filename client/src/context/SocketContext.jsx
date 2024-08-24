@@ -14,7 +14,7 @@ const SocketContextProvider = ({ children }) => {
 
         useEffect(() => {
             if(authUser){
-                const socket = io("http://localhost:5000",{
+                const socket = io("https://nchatapp-server.vercel.app",{
                     query: {
                         userId: authUser._id,
                     }
