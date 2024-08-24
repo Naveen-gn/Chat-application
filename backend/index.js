@@ -17,7 +17,7 @@ mongoose
   .then(() => console.log('MongoDB is connected'))
   .catch(err => console.error(err));
   
-var whitelist = ['http://localhost:3000', '*']
+var whitelist = ['http://localhost:3000','https://nchatapp.vercel.app/signin']
 var corsOptions = {
   origin: function (origin, callback) {
     if (whitelist.indexOf(origin) !== -1) {
@@ -28,7 +28,7 @@ var corsOptions = {
   }
 }
 
-  app.use(cors());
+  app.use(cors(corsOptions));
   app.use(express.json());
   app.use(cookieParser());
   
