@@ -8,7 +8,7 @@ const server = http.createServer(app);
 const io = new Server(server,{
     cors: {
       //origin: "https://my-frontend.com",
-      origin: ["https://nchatapp.vercel.app", "https://nchatapp-server.vercel.app", "http://localhost:3000"],
+      origin: ["https://nchatapp.vercel.app", "https://nchatapp-server.vercel.app"],
       credentials: true
     }
   });
@@ -19,7 +19,7 @@ export const getReceiverSocketId = (receiverId) => {
 
 const userSocketMap ={};
 
-io.on('connection', (socket) => {
+io.on('https://nchatapp-server.vercel.app', (socket) => {
     console.log('A user connected',socket.id);
     const userId = socket.handshake.query.userId;
     if (userId !=undefined){
