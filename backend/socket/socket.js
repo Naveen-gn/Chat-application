@@ -7,8 +7,8 @@ const app = express();
 const server = http.createServer(app);
 const io = new Server(server,{
     cors: {
-      //origin: "https://my-frontend.com",
-      origin: ["https://nchatapp.vercel.app", "https://nchatapp-server.vercel.app"],
+      origin: "https://nchatapp.vercel.app",
+      //origin: ["https://nchatapp.vercel.app", "https://nchatapp-server.vercel.app"],
       credentials: true
     }
   });
