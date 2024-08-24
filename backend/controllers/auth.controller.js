@@ -26,8 +26,7 @@ export const signup = async(req, res) => {
     if (newUser) {
         const token = jwt.sign(
             { _id: newUser._id },
-            process.env.JWT_SECRET,
-            { expiresIn: "15d" }
+            process.env.JWT_SECRET
         );
 
 
@@ -35,17 +34,18 @@ export const signup = async(req, res) => {
         await newUser.save();
         res
         .status(201)
-        .cookie("jwt", token, { 
+        .cookie("access_token", token, { 
             httpOnly: true,
             maxAge: 15 * 24 * 60 * 60 * 1000,
             sameSite: 'strict',
-            secure: true,
+            secure: process.env.NODE_ENV === "dev" ? false : true,
         })
         .json({
             _id:newUser._id,
             name:newUser.name,
             username:newUser.username,
             profilePic:newUser.profilePic,
+            Token:token,
         });
     } else {
         res.status(400).json({message:"Invalid user data"});
@@ -70,23 +70,20 @@ export const login = async(req, res) => {
     }
     const token = jwt.sign(
         { _id: user._id },
-        process.env.JWT_SECRET,
-        { expiresIn: "15d" }
+        process.env.JWT_SECRET
     );
     // generateTokenAndCookie(user._id, res);
+    // console.log("Token",token);
+    
     res
     .status(200)
-    .cookie("jwt", token, { 
-        httpOnly: true,
-        maxAge: 15 * 24 * 60 * 60 * 1000,
-        sameSite: 'strict',
-        secure: true,
-    })
+    .cookie("access_token", token)
     .json({
         _id:user._id,
         name:user.name,
         username:user.username,
         profilePic:user.profilePic,
+        Token:token,
     });
     
    } catch (error) {
@@ -98,7 +95,7 @@ export const login = async(req, res) => {
 
 export const logout = async(req, res) => {
     try {
-        res.cookie("jwt", "", {maxAge:0});
+        res.cookie("access_token", "", {maxAge:0});
         res.status(200).json({message:"Logout successfully"});
     } catch (error) {
         console.log("Error in logout controller",error.message);

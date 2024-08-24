@@ -3,6 +3,7 @@ import { Link, useNavigate } from "react-router-dom";
 import Chaticon from "../assets/chat.png";
 import { useAuthContext } from "../context/AuthContext";
 import toast from "react-hot-toast";
+import { API_URL } from "../config";
 
 
 export default function Signin() {
@@ -15,7 +16,7 @@ export default function Signin() {
     e.preventDefault();
     setLoading(true);
     try {
-      const res = await fetch("https://chat-app-server-chi-three.vercel.app/api/auth/login", {
+      const res = await fetch(`${API_URL}/api/auth/login`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -23,6 +24,8 @@ export default function Signin() {
         body: JSON.stringify({ username, password }),
       });
       const data = await res.json();
+      console.log("Data", data);
+      
       if(res.status !== 200){
         throw new Error(data.message);
       }
@@ -34,6 +37,7 @@ export default function Signin() {
       }
       if(res.status === 200){
       localStorage.setItem("chat-user", JSON.stringify(data));
+      localStorage.setItem("access_token", data.Token);
       setAuthUser(data);
       }
       

@@ -1,5 +1,6 @@
 import React,{ useEffect,useState } from 'react';
 import { toast } from 'react-hot-toast';
+import { API_URL } from '../config';
 
 
 const useGetConversation = () => {
@@ -9,21 +10,21 @@ const useGetConversation = () => {
     const getConversations = async () => {
         setLoading(true);
         try {
-            const jwt = document.cookie.split('; ').find(row => row.startsWith('jwt=')).split('=')[1];
-            console.log("jwt",jwt);
-            
-            const res = await fetch('https://chat-app-server-chi-three.vercel.app/api/users', {
+            const res = await fetch(`${API_URL}/api/users`, {
+                method: "GET",
                 headers: {
-                    'Authorization': `Bearer ${jwt}`
-                }
-            });
+                    "Content-Type": "application/json",
+                    Authorization: `${localStorage.getItem("access_token")}`,
+                },
+            }
+            );
             const data = await res.json();
             if(data.error){
                 throw new Error(data.error);
             }
             setConversations(data);
         } catch (error) {
-            toast.error(error.message);
+            toast.error(error.message,"Name not found");
             
         } finally {
             setLoading(false);

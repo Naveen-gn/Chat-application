@@ -5,14 +5,10 @@ import react from '@vitejs/plugin-react-swc'
 export default defineConfig({
   server: {
     port: 3000,
-    proxy: {
-      '/api': 'https://chat-app-server-chi-three.vercel.app',
-      secure: false,
-    },
   },
   plugins: [react()],
   build: {
-    outDir: './dist',
+    outDir: './build',// Specify the output directory
     emptyOutDir: false,// Specify the output directory
   }
 })

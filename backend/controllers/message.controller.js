@@ -7,7 +7,7 @@ export const sendMessage= async(req,res)=>{
         const {id:reciverId}= req.params;
         const senderId = req.user._id;
         const {message} = req.body;
-        // console.log("message",message);
+        console.log("message",message);
         // console.log("reciverId",reciverId);
         // console.log("senderId",senderId);
         let conversation = await Conversation.findOne({
@@ -51,7 +51,7 @@ export const getMessage= async(req,res)=>{
         const senderId = req.user._id;
         const conversation = await Conversation.findOne({
             participants:{$all:[senderId,userToChatId]},
-        }).populate('message');
+        })?.populate('message');
         if(!conversation){
             res.status(200).json([]);
         }
