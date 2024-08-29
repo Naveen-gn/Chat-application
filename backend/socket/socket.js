@@ -6,11 +6,16 @@ import express from 'express';
 const app = express();
 const server = http.createServer(app);
 const io = new Server(server,{
+    path: '/socket.io',
+    wssEngine: ['ws','wss'],
+    transports: ['websocket','polling'],
     cors: {
-      origin: "https://nchatapp.vercel.app",
+      origin: "*",
+    //   origin: "https://nchatapp.vercel.app",
       //origin: ["https://nchatapp.vercel.app", "https://nchatapp-server.vercel.app"],
-      credentials: true
-    }
+    //   credentials: true
+    },
+    allowEIO3: true
   });
 
 export const getReceiverSocketId = (receiverId) => {
