@@ -20,7 +20,12 @@ const SocketContextProvider = ({ children }) => {
                 query: {
                     userId: authUser._id, // Passing the userId as a query parameter
                 },
-                withCredentials: true // Ensures cookies are sent with requests if needed
+                withCredentials: true, // Ensures cookies are sent with requests if needed
+                reconnection: true, // Reconnect automatically if the connection is lost
+                reconnectionDelay: 500, // Reconnection attempt delay in milliseconds
+                reconnectionAttempts: 10, // Maximum reconnection attempts
+                transports: ["websocket"], // Forces the use of WebSockets
+
             });
 
             setSocket(socket);
