@@ -1,7 +1,6 @@
 import becrypt from "bcryptjs";
 import User from "../model/user.model.js";
-import jwt from 'jsonwebtoken';
-// import generateTokenAndCookie from "../utils/generateToken.js";
+import generateTokenAndCookie from "../utils/generateToken.js";
 
 export const signup = async(req, res) => {
    try {
@@ -24,28 +23,14 @@ export const signup = async(req, res) => {
         profilePic: gender==="male"?boyProfilePic:girlProfilePic,
     })
     if (newUser) {
-        const token = jwt.sign(
-            { _id: newUser._id },
-            process.env.JWT_SECRET
-        );
-
-
-        // generateTokenAndCookie(newUser._id, res);
+     
+        generateTokenAndCookie(newUser._id, res);
         await newUser.save();
-        res
-        .status(201)
-        .cookie("access_token", token, { 
-            httpOnly: true,
-            maxAge: 15 * 24 * 60 * 60 * 1000,
-            sameSite: 'strict',
-            secure: process.env.NODE_ENV === "dev" ? false : true,
-        })
-        .json({
+        res.status(201).json({
             _id:newUser._id,
             name:newUser.name,
             username:newUser.username,
             profilePic:newUser.profilePic,
-            Token:token,
         });
     } else {
         res.status(400).json({message:"Invalid user data"});
@@ -68,22 +53,15 @@ export const login = async(req, res) => {
     if(!isMatch){
         return res.status(400).json({message:"Invalid password."});
     }
-    const token = jwt.sign(
-        { _id: user._id },
-        process.env.JWT_SECRET
-    );
-    // generateTokenAndCookie(user._id, res);
+   
+    generateTokenAndCookie(user._id, res);
     // console.log("Token",token);
     
-    res
-    .status(200)
-    .cookie("access_token", token)
-    .json({
+    res.status(200).json({
         _id:user._id,
         name:user.name,
         username:user.username,
         profilePic:user.profilePic,
-        Token:token,
     });
     
    } catch (error) {
