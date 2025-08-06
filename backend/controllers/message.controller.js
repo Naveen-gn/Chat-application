@@ -1,3 +1,4 @@
+import mongoose from "mongoose";
 import Conversation from '../model/conversation.model.js';
 import Message from '../model/message.model.js';
 import { getReceiverSocketId, io } from '../socket/socket.js';
