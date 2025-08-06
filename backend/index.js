@@ -1,8 +1,8 @@
-import express, { json } from 'express';
+import express from 'express';
 import path from 'path';
-import cors from 'cors';
-import mongoose, { connect, get } from 'mongoose';
-import dotenv, { config } from 'dotenv';
+// import cors from 'cors';
+import mongoose from 'mongoose';
+import dotenv from 'dotenv';
 import cookieParser from 'cookie-parser';
 
 
@@ -18,18 +18,18 @@ mongoose
   .then(() => console.log('MongoDB is connected'))
   .catch(err => console.error(err));
   
-var whitelist = ['http://localhost:3000','https://nchatapp.vercel.app']
-var corsOptions = {
-  origin: function (origin, callback) {
-    if (whitelist.indexOf(origin) !== -1) {
-      callback(null, true)
-    } else {
-      callback(new Error('Not allowed by CORS'))
-    }
-  }
-}
+// var whitelist = ['http://localhost:3000','https://nchatapp.vercel.app']
+// var corsOptions = {
+//   origin: function (origin, callback) {
+//     if (whitelist.indexOf(origin) !== -1) {
+//       callback(null, true)
+//     } else {
+//       callback(new Error('Not allowed by CORS'))
+//     }
+//   }
+// }
 
-  app.use(cors(corsOptions));
+//   app.use(cors(corsOptions));
   app.use(express.json());
   app.use(cookieParser());
   const PORT = process.env.PORT || 5000;
