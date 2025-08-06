@@ -36,7 +36,6 @@ export default function Signin() {
       }
       if(res.status === 200){
       localStorage.setItem("chat-user", JSON.stringify(data));
-      localStorage.setItem("access_token", data.Token);
       setAuthUser(data);
       }
       
