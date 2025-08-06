@@ -7,8 +7,4 @@ export default defineConfig({
     port: 3000,
   },
   plugins: [react()],
-  build: {
-    outDir: './build',// Specify the output directory
-    emptyOutDir: false,// Specify the output directory
-  }
 })
