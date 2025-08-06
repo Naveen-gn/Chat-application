@@ -2,7 +2,6 @@ import React,{ useState } from 'react'
 import {BiLogOut} from 'react-icons/bi'
 import { useAuthContext } from '../context/AuthContext'
 import { toast } from 'react-hot-toast'
-import { API_URL } from '../config'
 
 export default function Logoutbutton() {
   const {setAuthUser}=useAuthContext();
@@ -10,7 +9,7 @@ export default function Logoutbutton() {
   const handleLogout = async() => {
     setLoading(true)
     try {
-      const res = await fetch(`${API_URL}/api/auth/logout`,{
+      const res = await fetch("/api/auth/logout",{
         method:"POST",
         headers:{"Content-Type":"application/json"}
       });

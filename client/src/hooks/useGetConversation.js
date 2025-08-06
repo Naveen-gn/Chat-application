@@ -1,6 +1,5 @@
 import React,{ useEffect,useState } from 'react';
 import { toast } from 'react-hot-toast';
-import { API_URL } from '../config';
 
 
 const useGetConversation = () => {
@@ -10,7 +9,7 @@ const useGetConversation = () => {
     const getConversations = async () => {
         setLoading(true);
         try {
-            const res = await fetch(`${API_URL}/api/users`, {
+            const res = await fetch("/api/users", {
                 method: "GET",
                 headers: {
                     "Content-Type": "application/json",

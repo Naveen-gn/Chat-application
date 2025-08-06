@@ -3,7 +3,6 @@ import Chaticon from "../assets/chat.png";
 import { Link, useNavigate } from "react-router-dom";
 import { toast } from "react-hot-toast";
 import { useAuthContext } from "../context/AuthContext";
-import { API_URL } from "../config";
 
 export default function Signin() {
   const [loading, setLoading] = useState(false);
@@ -28,7 +27,7 @@ export default function Signin() {
     }
     setLoading(true);
     try {
-      const res = await fetch(`${API_URL}/api/auth/signup`, {
+      const res = await fetch("/api/auth/signup", {
         method: "POST",
         headers: {"Content-Type": "application/json"},
         body: JSON.stringify(inputs),
